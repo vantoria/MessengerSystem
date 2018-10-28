@@ -20,9 +20,14 @@ public class dialogueManager : MonoBehaviour {
     public void startMessenger()
     {
         // create empty conversation chat       
-        Vector3 spawnTemp = background.GetComponent<Collider2D>().bounds.max;
-        Debug.Log(spawnTemp);
-        GameObject myTextbox = Instantiate(textBox, spawnTemp, Quaternion.identity) as GameObject;
+        //Vector3 spawnTemp = background.GetComponent<Collider2D>().bounds.max;
+
+        Vector3 tempPos;
+        //float half;
+        //half = (background.rectTransform.rect.height / 2);
+        tempPos = new Vector3(textBox.transform.position.x, textBox.transform.position.y, textBox.transform.position.z);
+        Debug.Log(tempPos);
+        GameObject myTextbox = Instantiate(textBox, tempPos, Quaternion.identity) as GameObject;
 
         myTextbox.transform.SetParent(GameObject.FindGameObjectWithTag("canvas").transform, false);
 
@@ -51,8 +56,6 @@ public class dialogueManager : MonoBehaviour {
             CharName.alignment = TextAnchor.MiddleLeft;
             MessengerText.alignment = TextAnchor.MiddleRight;
         }
-
-
 
         textSize(MessengerText.cachedTextGenerator.lineCount, MessengerText);
         StartCoroutine(textTyping(dialogue[sentencesCount].messages));
